@@ -1,8 +1,17 @@
 
-Quick Jooby start up guide
+# Jooby Project Template 
 
-All Official documentation can be found here: https://jooby.io/
+A basic template and starter guide to making your own simple backend server in Java.
 
-- Make sure when starting the project for the first time that you do a maven install
-- Most maven stuff can be found on the Maven tab toward the right
-- If you are unsure of what to do for maven, just hit all the refresh buttons a bunch of times, that's what I do
+All Official documentation can be found at https://jooby.io/
+
+
+## Installation
+
+This project requires Maven. Which can be installed for your machine at https://maven.apache.org/download.cgi 
+
+Then run a quick install by running:
+
+`mvn install`
+
+Running the project will automatically 

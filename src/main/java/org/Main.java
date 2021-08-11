@@ -1,17 +1,10 @@
-package org.ben;
+package org;
 
 /**
  * Quick Jooby start up guide
  * All Official documentation can be found here: https://jooby.io/
- *
- * Make sure when starting the project for the first time that you do a maven install
- * Most maven stuff can be found on the Maven tab toward the right
- * If you are unsure of what to do for maven, just hit all the refresh buttons a bunch of times, that's what I do
- *
  */
 
-// Jooby imports
-// These should not be red after you maven have
 import io.jooby.FileUpload;
 import io.jooby.Jooby;
 import io.jooby.MediaType;
@@ -19,7 +12,10 @@ import io.jooby.ServerOptions;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.json.JSONObject;
 
 /**
  * I should also mention that the official documentation has the main class extend Jooby
@@ -27,15 +23,8 @@ import java.io.FileOutputStream;
  */
 public class Main {
 
-    /**
-     * Everthing goes inside the main method
-     * In Intellij, click the green arrow over to the left of the class to start
-     * After that you can click the green toward the top right of the IDE to keep running the same thing
-     * You can also right click the file you want to run, and click "Run"
-     * */
     public static void main(String [] args){
 
-        //Creating a Jooby object, like any object you can name it anything, but app is less confusing
         Jooby app = new Jooby();
 
         /**
@@ -56,19 +45,30 @@ public class Main {
          */
         app.get("/", ctx -> {
 
-            // This route returns an html page, which the browser should render instead of just printing out html
-            // It's good practice to set the response type to MediaType.html
             // If you want to return a file, make sure you denote the file type, or just plain "file"
             ctx.setResponseType(MediaType.html);
             return new File("src/main/resources/index.html");
         });
 
         /**
-         * other routing example
+         * Other routing example returning raw text instead of an html template
          */
         app.get("/otherPage", ctx -> {
             // This is not returning html, instead the browser will just display the text returned
             return "It's working, it's working Qui-Gon";
+        });
+
+        /**
+         * Routing example returning a JSON object
+         */
+        app.get("/jsonExample", ctx -> {
+            // This is not returning html, instead the browser will just display the text returned
+
+            Map<String, String> dictionary = new HashMap<>();
+            dictionary.put("JSONStatus", "working");
+
+            ctx.setResponseType(MediaType.json);
+            return new JSONObject(dictionary);
         });
 
         /**
@@ -81,11 +81,8 @@ public class Main {
             return num;
         });
 
-
         /**
-         * Example post method
-         * Must be accessed through an html form
-         *
+         * Post and getting data from a form example
          */
         app.post("/post", ctx ->{
             String formPost = ctx.form("textBox").value();
