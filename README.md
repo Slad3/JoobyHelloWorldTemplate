@@ -14,4 +14,4 @@ Then run a quick install by running:
 
 `mvn install`
 
-Running the project will automatically 
+Running the project will automatically start the server at http://localhost:8080
